@@ -1,0 +1,93 @@
+/* Base CSS. These attributes remain unchanged regardless of whether or not the song is playing. */
+.song-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.song-row-deletebutton {
+    width: 5%;
+    max-width: 5%;
+    min-width: 5%;
+    background: #3B4252;
+    border: none;
+}
+
+.song-row-deletebutton:hover {
+    background: #BF616A;
+}
+
+.song-row-playbutton {
+    display: flex;
+    align-items: center;
+    width: 95%;
+    max-width: 95%;
+    min-height: 40px;
+    height: 40px;
+    max-height: 40px;
+    border: none;
+}
+
+.song-row-playbutton span {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.song-span-title {
+    padding-left: 5px;
+    width: 35%;
+    max-width: 35%;
+    text-align: left;
+}
+
+.song-span-artist {
+    width: 25%;
+    text-align: left;
+}
+
+.song-span-album {
+    width: 25%;
+    text-align: left;
+}
+
+.song-span-length {
+    flex-direction: row-reverse;
+    width: 15%;
+    padding-right: 5px;
+    text-align: right;
+}
+
+/* CSS for when a song is not playing */
+.notplaying {
+    background: #3B4252;
+}
+
+.notplaying:hover {
+    background: #333947;
+}
+
+.notplaying span {
+    background: #3B4252;
+}
+
+.notplaying:hover span {
+    background: #333947;
+}
+
+/* CSS for when a song is playing */
+.playing {
+    background: #8FBCBB;
+}
+
+.playing:hover {
+    background: #74a6a6;
+}
+
+.playing:hover span {
+    background: #74a6a6;
+}
+
+.playing span {
+    background: #8FBCBB;
+}

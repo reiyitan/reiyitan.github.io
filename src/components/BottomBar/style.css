@@ -1,0 +1,132 @@
+#bottom-bar {
+    position: absolute;
+    bottom: 0px;
+    height: 80px;
+    width: 100%;
+    left: 0px;
+    background-color: #5E81AC;
+}
+
+#bottom-bar span {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    background-color: #5E81AC;
+    width: 300px;
+    max-width: 300px;
+}
+
+.bottom-bar-title {
+    position: absolute;
+    left: 5px;
+    top: 10px;
+}
+
+.bottom-bar-artist {
+    position: absolute;
+    left: 5px;
+    bottom: 10px;
+    font-size: 14px;
+}
+
+.button {
+    position: absolute;
+    display: inline-block;
+    border: none;
+    border-radius: 50%;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.pause-play {
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 35px;
+    height: 35px;
+}
+
+.play {
+    background-image: url("../../icons/play/play.png");
+}
+
+.play:hover {
+    background-image: url("../../icons/play/play-hover.png");
+}
+
+.pause {
+    background-image: url("../../icons/pause/pause.png");
+}
+
+.pause:hover {
+    background-image: url("../../icons/pause/pause-hover.png");
+}
+
+.small {
+    top: 15%;
+    width: 25px;
+    height: 25px;
+}
+
+.shuffle {
+    left: 50%;
+    transform: translateX(calc(-50% - 95px));
+}
+
+.shuffle-on {
+    background-image: url("../../icons/shuffle/shuffle-on.png");
+}
+
+.shuffle-on:hover {
+    background-image: url("../../icons/shuffle/shuffle-on-hover.png");
+}
+
+.shuffle-off {
+    background-image: url("../../icons/shuffle/shuffle-off.png");
+}
+
+.shuffle-off:hover {
+    background-image: url("../../icons/shuffle/shuffle-off-hover.png");
+}
+
+.rw {
+    left: 50%;
+    transform: translateX(calc(-50% - 50px));
+    background-image: url("../../icons/rw/rw.png");
+}
+
+.rw:hover {
+    background-image: url("../../icons/rw/rw-hover.png");
+}
+
+.ff {
+    left: 50%;
+    transform: translateX(calc(-50% + 50px));
+    background-image: url("../../icons/ff/ff.png");
+}   
+
+.ff:hover {
+    background-image: url("../../icons/ff/ff-hover.png");
+}
+
+.loop {
+    left: 50%;
+    transform: translateX(calc(-50% + 95px));
+}
+
+.loop-on {
+    background-image: url("../../icons/loop/loop-on.png");
+}
+
+.loop-on:hover {
+    background-image: url("../../icons/loop/loop-on-hover.png");
+}
+
+.loop-off {
+    background-image: url("../../icons/loop/loop-off.png");
+}
+
+.loop-off:hover {
+    background-image: url("../../icons/loop/loop-off-hover.png");
+}

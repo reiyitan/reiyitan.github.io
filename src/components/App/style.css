@@ -1,0 +1,18 @@
+* {
+    font-family: Arial;
+    box-sizing: border-box;
+    background-color: #2E3440;
+    color: #ECEFF4;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #434C5E;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #5E81AC;
+}

@@ -1,0 +1,165 @@
+/* These elements do not change when a song is playing */
+.song-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.add-button {
+    width: 5%;
+    max-width: 5%;
+    min-width: 5%;
+    border: none;
+}
+
+.notadding {
+    background: #3B4252;
+}
+
+.notadding:hover {
+    background: #A3BE8C;
+}
+
+.adding {
+    background: #A3BE8C;
+}
+
+.adding:hover {
+    background: #97af81;
+}
+
+.hidden {
+    display: none;
+}
+
+.song-row-playbutton {
+    display: flex;
+    align-items: center;
+    width: 95%;
+    max-width: 95%;
+    min-height: 40px;
+    height: 40px;
+    max-height: 40px;
+    border: none;
+}
+
+.song-row-playbutton span {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.song-span-title {
+    padding-left: 5px;
+    width: 35%;
+    max-width: 35%;
+    text-align: left;
+}
+
+.song-span-artist {
+    width: 25%;
+    text-align: left;
+}
+
+.song-span-album {
+    width: 25%;
+    text-align: left;
+}
+
+.song-span-length {
+    flex-direction: row-reverse;
+    width: 15%;
+    padding-right: 5px;
+    text-align: right;
+}
+
+/* These elements change when a song is playing */
+/* CSS for when song is not playing */
+.notplaying {
+    background: #3B4252;
+}
+
+.notplaying:hover {
+    background: #333947;
+}
+
+.notplaying span {
+    background: #3B4252;
+}
+
+.notplaying:hover span {
+    background: #333947;
+}
+
+/* CSS for when song is playing */
+.playing {
+    background: #8FBCBB;
+}
+
+.playing:hover {
+    background: #74a6a6;
+}
+
+.playing span {
+    background: #8FBCBB;
+}
+
+.playing:hover span {
+    background: #74a6a6;
+}
+
+/* CSS for the list of playlists that display when a user clicks the add song button */
+.playlist-list-wrapper {
+    position: absolute;
+    right: 0px;
+    width: 200px;
+    max-width: 200px;
+}
+
+.playlist-list-header {
+    position: absolute;
+    top: 0px;
+    height: 20px;
+    width: 100%;
+    max-width: 100%;
+    font-size: 12px;
+    border-style: solid;
+    border-bottom: none;
+    border-color: #434C5E;
+    border-width: 2px;
+    background: #3B4252;
+    display: flex;
+    align-items: center;
+}
+
+.playlist-list {
+    position: absolute;
+    top: 20px;
+    line-height: 1px;
+    max-height: 120px;
+    width: 100%;
+    max-width: 100%;
+    right: 0px;
+    border-style: solid;
+    border-color: #434C5E;
+    border-width: 2px;
+    overflow-y: scroll;
+}
+
+.playlist-select-button {
+    background: #3B4252;
+    width: 186px;
+    max-width: 186px;
+    border: none;
+    padding: 0px;
+    margin: 0px;
+    text-align: left;
+    border: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.playlist-select-button:hover {
+    background: #333947;
+}
