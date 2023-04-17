@@ -34,7 +34,10 @@ export default function createPlayback(
     setCurrPlaylistPlaying
 ) {
     let path;
-    if (title === "test1") {
+    if (title === "matthew") {
+        path = "../../songs/matthew.mp3";
+    }
+    else if (title === "test1") {
         path = "../../songs/test1.mp3";
     }
     else if (title === "test2") {
