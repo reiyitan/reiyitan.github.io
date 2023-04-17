@@ -8,10 +8,10 @@
  * @returns A list of the songs in the playlist.
  */
 export default function loadPlaylistSongs(user, playlistName) {
-    //TODO: actually get the songs from the backend
     if (playlistName === "test") {
         return [
             {"title": "matthew", "artist": "hi", "album": "tests", "length": "1:23"},
+            {"title": "MOTIVATION", "artist": "qwerty", "album": "tests", "length": "1:23"},
             {"title": "test1", "artist": "testing", "album": "tests", "length": "1:23"},
             {"title": "test2", "artist": "Kevin Macleod", "album": "N/A", "length": "length"},
             {"title": "test3", "artist": "Kevin Macleod", "album": "N/A", "length": "length"},
@@ -20,7 +20,6 @@ export default function loadPlaylistSongs(user, playlistName) {
     }
     if (playlistName === "kevin") {
         return [
-            {"title": "test", "artist": "testing", "album": "tests", "length": "1:23"},
             {"title": "Cipher", "artist": "Kevin Macleod", "album": "N/A", "length": "length"},
             {"title": "The Builder", "artist": "Kevin Macleod", "album": "N/A", "length": "length"},
             {"title": "Sneaky Snitch", "artist": "Kevin Macleod", "album": "N/A", "length": "length"},

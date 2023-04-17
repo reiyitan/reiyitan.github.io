@@ -37,6 +37,9 @@ export default function createPlayback(
     if (title === "matthew") {
         path = "../../songs/matthew.mp3";
     }
+    else if (title === "MOTIVATION") {
+        path = "../../songs/MOTIVATION.mp3";
+    }
     else if (title === "test1") {
         path = "../../songs/test1.mp3";
     }
@@ -57,7 +60,7 @@ export default function createPlayback(
     }
     const playback = new Howl({
         src: [path],
-        volume: 0.15,
+        volume: 0.2,
         onload: () => {
             playback.play();
             setSongIsPlaying(true);
