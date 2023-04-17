@@ -35,7 +35,7 @@ export default function createPlayback(
 ) {
     let path;
     if (title === "matthew") {
-        path = "../../songs/matthew.mp3";
+        path = "../../songs/Matthew.mp3";
     }
     else if (title === "MOTIVATION") {
         path = "../../songs/MOTIVATION.mp3";
