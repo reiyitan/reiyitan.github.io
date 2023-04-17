@@ -11,7 +11,7 @@ export default function loadPlaylistSongs(user, playlistName) {
     //TODO: actually get the songs from the backend
     if (playlistName === "test") {
         return [
-            {"title": "matthew", "artist": "hi matthew", "album": "tests", "length": "1:23"},
+            {"title": "matthew", "artist": "hi", "album": "tests", "length": "1:23"},
             {"title": "test1", "artist": "testing", "album": "tests", "length": "1:23"},
             {"title": "test2", "artist": "Kevin Macleod", "album": "N/A", "length": "length"},
             {"title": "test3", "artist": "Kevin Macleod", "album": "N/A", "length": "length"},

@@ -57,7 +57,7 @@ export default function createPlayback(
     }
     const playback = new Howl({
         src: [path],
-        volume: 0.1,
+        volume: 0.15,
         onload: () => {
             playback.play();
             setSongIsPlaying(true);
