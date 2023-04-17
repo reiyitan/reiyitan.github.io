@@ -1,4 +1,20 @@
 import { Howl } from "howler"; 
+import { default as loadPlaylistSongs } from "./loadPlaylistSongs";
+
+function stopPlayback(setSongIsPlaying, setCurrPlaylistPlaying, setCurrentSong, playbackRef) {
+    setSongIsPlaying(false);
+    setCurrPlaylistPlaying("");
+    setCurrentSong("");
+    playbackRef.current = null;
+}
+
+function popFromQueue(queueRef, setQueue, setCurrentSong) {
+    const newQueue = queueRef.current.slice();
+    const nextSong = newQueue.pop();
+    setQueue(newQueue);
+    setCurrentSong(nextSong);
+    return nextSong;
+}
 
 export default function createPlayback(
     title,
@@ -7,12 +23,14 @@ export default function createPlayback(
     length, 
     setSongIsPlaying,
     shuffleRef,
+    loopRef,
     queueRef,
     setQueue,
     historyRef,
     setHistory,
     setCurrentSong,
     playbackRef,
+    currPlaylistPlayingRef,
     setCurrPlaylistPlaying
 ) {
     let path;
@@ -44,16 +62,14 @@ export default function createPlayback(
         },
         onend: () => {
             playback.unload();
-            if (queueRef.current.length === 0) {
-                setSongIsPlaying(false);
-                setCurrPlaylistPlaying("");
-                setCurrentSong("");
+            if (queueRef.current.length === 0 && !loopRef.current) {
+                stopPlayback(setSongIsPlaying, setCurrPlaylistPlaying, setCurrentSong, playbackRef);
                 return;
             }
-            const newQueue = queueRef.current;
-            const nextSong = newQueue.pop();
-            setCurrentSong(nextSong);
-            setQueue(newQueue);
+            else if (queueRef.current.length === 0 && loopRef.current) {
+                queueRef.current = loadPlaylistSongs("user id here", currPlaylistPlayingRef.current).reverse();
+            }
+            const nextSong = popFromQueue(queueRef, setQueue, setCurrentSong, loopRef);
             createPlayback(
                 nextSong.title,
                 nextSong.artist,
@@ -61,12 +77,14 @@ export default function createPlayback(
                 nextSong.length,
                 setSongIsPlaying,
                 shuffleRef,
+                loopRef,
                 queueRef,
                 setQueue,
                 historyRef,
                 setHistory,
                 setCurrentSong,
                 playbackRef,
+                currPlaylistPlayingRef,
                 setCurrPlaylistPlaying
             );
         }

@@ -1,7 +1,7 @@
 import React from "react"; 
 import "./style.css"; 
 import { useState, useRef, useEffect, createContext } from "react";
-import { createPlayback, loadPlaylistSongs } from "../functions";
+import { createPlayback, loadPlaylistSongs, slicePlaylist } from "../functions";
 import Header from "../Header"; 
 import Searchbar from "../Searchbar";
 import Sidebar from "../Sidebar"; 
@@ -16,15 +16,17 @@ const Context = createContext();
  * @returns The main component.
  */
 const App = () => {
-    const [header, setHeader] = useState("");
+    const [header, setHeader] = useState("work in progress");
     const [displayType, setDisplayType] = useState("");
     const [displaySongs, setDisplaySongs] = useState([]);
     const [currentSong, setCurrentSong] = useState("");
     const [openID, setOpenID] = useState("");
-    const [currPlaylistPlaying, setCurrPlaylistPlaying] = useState("");
     const [currPlaylistDisplaying, setCurrPlaylistDisplaying] = useState("");
     const [songIsPlaying, setSongIsPlaying] = useState(false);
     const playbackRef = useRef(null);
+    const [currPlaylistPlaying, setCurrPlaylistPlaying] = useState("");
+    const currPlaylistPlayingRef = useRef("");
+    useEffect(() => {currPlaylistPlayingRef.current = currPlaylistPlaying;}, [currPlaylistPlaying]);
     const [queue, setQueue] = useState([]);
     const queueRef = useRef(queue);
     useEffect(() => {queueRef.current = [...queue];}, [queue]);
@@ -35,6 +37,8 @@ const App = () => {
     const shuffleRef = useRef(shuffle);
     useEffect(() => {shuffleRef.current = shuffle;}, [shuffle]);
     const [loop, setLoop] = useState(false);
+    const loopRef = useRef(loop);
+    useEffect(() => {loopRef.current = loop;}, [loop]);
 
     /**
      * Deletes a song from a playlist.
@@ -67,8 +71,6 @@ const App = () => {
     * Creates a Howl from currentSong.
     * If the requested song is equal to the current song resume the current song,
     * otherwise load the requested song.
-    * If the currPlaylistDisplaying and currPlaylistPlaying are the same, then don't change the queue,
-    * otherwise update the queue.
     * 
     * @param title - The title of the song to be played.
     * @param artist - The artist of the song to be played.
@@ -76,6 +78,7 @@ const App = () => {
     * @param length - The length of the song to be played.
     */
     const playSong = (title, artist, album, length) => {
+        //the requested song is already playing. 
         if (playbackRef.current
             && currentSong.title === title
             && currentSong.artist === artist
@@ -85,6 +88,7 @@ const App = () => {
             setSongIsPlaying(true);
             playbackRef.current.play();
         }
+        //the requested song is not already playing. 
         else {
             if (playbackRef.current) playbackRef.current.unload();
             playbackRef.current = createPlayback(
@@ -94,24 +98,26 @@ const App = () => {
                 length,
                 setSongIsPlaying,
                 shuffleRef,
+                loopRef,
                 queueRef,
                 setQueue,
                 historyRef,
                 setHistory,
                 setCurrentSong,
                 playbackRef,
+                currPlaylistPlayingRef,
                 setCurrPlaylistPlaying
             );
         }
-        if (currPlaylistPlaying !== currPlaylistDisplaying
-                && displayType === "playlist") {
+        if (displayType === "playlist") {
             setQueue(
-                loadPlaylistSongs("user id here", currPlaylistDisplaying).filter(
-                    (song) => 
-                        !(song.title === title
-                        && song.artist === artist
-                        && song.album === album
-                        && song.length === length)
+                slicePlaylist(
+                    "user goes here",
+                    currPlaylistDisplaying,
+                    title,
+                    artist,
+                    album,
+                    length
                 ).reverse()
             )
         }
@@ -133,7 +139,6 @@ const App = () => {
         setCurrPlaylistDisplaying,
         currPlaylistPlaying,
         setCurrPlaylistPlaying,
-        shuffleRef
     };
 
     return (
