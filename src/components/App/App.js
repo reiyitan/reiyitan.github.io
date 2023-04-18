@@ -1,7 +1,7 @@
 import React from "react"; 
 import "./style.css"; 
 import { useState, useRef, useEffect, createContext } from "react";
-import { createPlayback, loadPlaylistSongs, slicePlaylist } from "../functions";
+import { createPlayback, slicePlaylist } from "../functions";
 import Header from "../Header"; 
 import Searchbar from "../Searchbar";
 import Sidebar from "../Sidebar"; 
@@ -105,6 +105,7 @@ const App = () => {
                 setHistory,
                 setCurrentSong,
                 playbackRef,
+                displayType,
                 currPlaylistPlayingRef,
                 setCurrPlaylistPlaying
             );

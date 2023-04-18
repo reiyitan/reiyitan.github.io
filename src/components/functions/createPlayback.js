@@ -1,7 +1,14 @@
 import { Howl } from "howler"; 
 import { default as loadPlaylistSongs } from "./loadPlaylistSongs";
 
-function stopPlayback(setSongIsPlaying, setCurrPlaylistPlaying, setCurrentSong, playbackRef) {
+function stopPlayback(
+    setSongIsPlaying, 
+    setCurrPlaylistPlaying, 
+    setCurrentSong, 
+    playbackRef,
+    setQueue
+) {
+    setQueue([]);
     setSongIsPlaying(false);
     setCurrPlaylistPlaying("");
     setCurrentSong("");
@@ -30,6 +37,7 @@ export default function createPlayback(
     setHistory,
     setCurrentSong,
     playbackRef,
+    displayType,
     currPlaylistPlayingRef,
     setCurrPlaylistPlaying
 ) {
@@ -53,7 +61,7 @@ export default function createPlayback(
         path = "../../songs/test4.mp3";
     }
     else if (artist !== "Kevin Macleod") {
-        path = `../../songs/Flight of the Bumblebee.mp3`;
+        path = `../../songs/countdown.mp3`;
     }
     else {
         path = `../../songs/${title}.mp3`;
@@ -68,8 +76,8 @@ export default function createPlayback(
         },
         onend: () => {
             playback.unload();
-            if (queueRef.current.length === 0 && !loopRef.current) {
-                stopPlayback(setSongIsPlaying, setCurrPlaylistPlaying, setCurrentSong, playbackRef);
+            if ((queueRef.current.length === 0 && !loopRef.current) || displayType === "search") {
+                stopPlayback(setSongIsPlaying, setCurrPlaylistPlaying, setCurrentSong, playbackRef, setQueue);
                 return;
             }
             else if (queueRef.current.length === 0 && loopRef.current) {
@@ -90,6 +98,7 @@ export default function createPlayback(
                 setHistory,
                 setCurrentSong,
                 playbackRef,
+                displayType,
                 currPlaylistPlayingRef,
                 setCurrPlaylistPlaying
             );
