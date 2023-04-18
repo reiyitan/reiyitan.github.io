@@ -20,9 +20,11 @@ const Searchbar = ({
 }) => {
     const {
         setDisplaySongs,
+        setCurrPlaylistPlaying
     } = useContext(Context);
     const handleSearch = (e) => {
         e.preventDefault();
+        setCurrPlaylistPlaying(null);
         setOpenID("");
         const query = e.target.query.value;
         if (query === "") return;

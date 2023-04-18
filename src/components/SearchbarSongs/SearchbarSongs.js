@@ -67,7 +67,8 @@ const SearchbarSong = function SearchbarSong({
     const {
         setCurrentSong,
         pauseSong,
-        playSong
+        playSong,
+        queueRef
     } = useContext(Context);
     const [playlists, setPlaylists] = useState([]);
     /**
@@ -87,6 +88,7 @@ const SearchbarSong = function SearchbarSong({
      * Plays the current song. 
      */
     const handlePlay = () => {
+        queueRef.current = [];
         setCurrentSong({
             "title": title,
             "artist": artist,

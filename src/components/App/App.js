@@ -24,15 +24,11 @@ const App = () => {
     const [currPlaylistDisplaying, setCurrPlaylistDisplaying] = useState("");
     const [songIsPlaying, setSongIsPlaying] = useState(false);
     const playbackRef = useRef(null);
-    const [currPlaylistPlaying, setCurrPlaylistPlaying] = useState("");
-    const currPlaylistPlayingRef = useRef("");
+    const [currPlaylistPlaying, setCurrPlaylistPlaying] = useState(null);
+    const currPlaylistPlayingRef = useRef(currPlaylistPlaying);
     useEffect(() => {currPlaylistPlayingRef.current = currPlaylistPlaying;}, [currPlaylistPlaying]);
-    const [queue, setQueue] = useState([]);
-    const queueRef = useRef(queue);
-    useEffect(() => {queueRef.current = [...queue];}, [queue]);
-    const [history, setHistory] = useState([]);
-    const historyRef = useRef(history);
-    useEffect(() => {historyRef.current = [...history];}, [history]);
+    const queueRef = useRef([]);
+    const historyRef = useRef([]);
     const [shuffle, setShuffle] = useState(false);
     const shuffleRef = useRef(shuffle);
     useEffect(() => {shuffleRef.current = shuffle;}, [shuffle]);
@@ -100,9 +96,7 @@ const App = () => {
                 shuffleRef,
                 loopRef,
                 queueRef,
-                setQueue,
                 historyRef,
-                setHistory,
                 setCurrentSong,
                 playbackRef,
                 displayType,
@@ -111,16 +105,14 @@ const App = () => {
             );
         }
         if (displayType === "playlist") {
-            setQueue(
-                slicePlaylist(
-                    "user goes here",
-                    currPlaylistDisplaying,
-                    title,
-                    artist,
-                    album,
-                    length
-                ).reverse()
-            )
+            queueRef.current = slicePlaylist(
+                "user goes here",
+                currPlaylistDisplaying,
+                title,
+                artist,
+                album,
+                length
+            ).reverse()
         }
     }
 
@@ -129,10 +121,6 @@ const App = () => {
         currentSong,
         setCurrentSong,
         setSongIsPlaying,
-        queue,
-        setQueue,
-        history,
-        setHistory,
         handleDelete,
         pauseSong,
         playSong,
@@ -140,6 +128,7 @@ const App = () => {
         setCurrPlaylistDisplaying,
         currPlaylistPlaying,
         setCurrPlaylistPlaying,
+        queueRef
     };
 
     return (
@@ -172,6 +161,11 @@ const App = () => {
                 setShuffle={setShuffle}
                 loop={loop}
                 setLoop={setLoop}
+                loopRef={loopRef}
+                queueRef={queueRef}
+                historyRef={historyRef}
+                displayType={displayType}
+                currPlaylistPlayingRef={currPlaylistPlayingRef}
             />
         </Context.Provider>
     );

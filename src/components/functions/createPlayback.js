@@ -6,21 +6,11 @@ function stopPlayback(
     setCurrPlaylistPlaying, 
     setCurrentSong, 
     playbackRef,
-    setQueue
 ) {
-    setQueue([]);
     setSongIsPlaying(false);
     setCurrPlaylistPlaying("");
     setCurrentSong("");
     playbackRef.current = null;
-}
-
-function popFromQueue(queueRef, setQueue, setCurrentSong) {
-    const newQueue = queueRef.current.slice();
-    const nextSong = newQueue.pop();
-    setQueue(newQueue);
-    setCurrentSong(nextSong);
-    return nextSong;
 }
 
 export default function createPlayback(
@@ -32,9 +22,7 @@ export default function createPlayback(
     shuffleRef,
     loopRef,
     queueRef,
-    setQueue,
     historyRef,
-    setHistory,
     setCurrentSong,
     playbackRef,
     displayType,
@@ -72,18 +60,25 @@ export default function createPlayback(
         onload: () => {
             playback.play();
             setSongIsPlaying(true);
+            setCurrentSong({
+                title: title,
+                artist: artist,
+                album: album,
+                length: length
+            });
             playbackRef.current = playback;
         },
         onend: () => {
             playback.unload();
             if ((queueRef.current.length === 0 && !loopRef.current) || displayType === "search") {
-                stopPlayback(setSongIsPlaying, setCurrPlaylistPlaying, setCurrentSong, playbackRef, setQueue);
+                stopPlayback(setSongIsPlaying, setCurrPlaylistPlaying, setCurrentSong, playbackRef);
                 return;
             }
             else if (queueRef.current.length === 0 && loopRef.current) {
                 queueRef.current = loadPlaylistSongs("user id here", currPlaylistPlayingRef.current).reverse();
             }
-            const nextSong = popFromQueue(queueRef, setQueue, setCurrentSong, loopRef);
+            const nextSong = queueRef.current.pop(); 
+            setCurrentSong(nextSong);
             createPlayback(
                 nextSong.title,
                 nextSong.artist,
@@ -93,9 +88,7 @@ export default function createPlayback(
                 shuffleRef,
                 loopRef,
                 queueRef,
-                setQueue,
                 historyRef,
-                setHistory,
                 setCurrentSong,
                 playbackRef,
                 displayType,

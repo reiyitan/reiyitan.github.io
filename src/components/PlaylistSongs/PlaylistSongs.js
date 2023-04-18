@@ -21,10 +21,6 @@ import "./style.css";
  * @param songIsPlaying - True if a song is playing, false otherwise. 
  * @param setSongIsPlaying - Update state of songIsPlaying. 
  * @param handleDelete - Function for deleting a song from a playlist.
- * @param history - A list of the songs that were previously played.
- * @param setHistory - Sets state of history.
- * @param queue - A list of the songs to be played.
- * @param setQueue - Sets state of queue.
  * 
  * @returns A component that represents one row of the playlist displayed on the main panel.
  */
@@ -39,10 +35,6 @@ const PlaylistSong = function({
     const {
         setCurrentSong,
         setSongIsPlaying,
-        queue,
-        setQueue,
-        history,
-        setHistory,
         handleDelete,
         pauseSong,
         playSong,

@@ -1,6 +1,7 @@
 import React from "react";
 import { Context } from "../App/App";
 import { useContext } from "react";
+import { createPlayback, loadPlaylistSongs } from "../functions";
 import "./style.css";
 
 /**
@@ -14,10 +15,6 @@ import "./style.css";
  * @param pauseSong - Function that handles pausing the current song. 
  * @param songIsPlaying - True if a song is currently playing, false otherwise. 
  * @param setSongIsPlaying - Sets the state of songIsPlaying.
- * @param history - A list of songs that were previously played.
- * @param setHistory - Set state of history.
- * @param queue - The queue of songs to be played.
- * @param setQueue - Sets the song queue. 
  */
 const BottomBar = ({
     currPlaylistPlaying,
@@ -28,17 +25,18 @@ const BottomBar = ({
     setShuffle,
     loop,
     setLoop,
+    loopRef,
+    queueRef,
+    historyRef,
+    displayType,
+    currPlaylistPlayingRef
 }) => {
     const {
         currentSong,
         setCurrentSong,
         setSongIsPlaying,
-        queue,
-        setQueue,
-        history,
-        setHistory,
         pauseSong,
-        shuffleRef
+        shuffleRef,
     } = useContext(Context);
 
     /**
@@ -71,7 +69,35 @@ const BottomBar = ({
      * Skips the current song and plays the next song in the queue. 
      */
     const handleForward = () => {
-
+        if (playbackRef.current) playbackRef.current.unload(); 
+        let nextSong;
+        if (queueRef.current.length > 0) nextSong = queueRef.current.pop();
+        else if (loop && currPlaylistPlaying) {
+            queueRef.current = loadPlaylistSongs("user goes here", currPlaylistPlaying).reverse();
+            nextSong = queueRef.current.pop();
+        }
+        else {
+            setCurrentSong("");
+            setSongIsPlaying(false);
+            playbackRef.current = null;
+            return;
+        }
+        playbackRef.current = createPlayback(
+            nextSong.title,
+            nextSong.artist,
+            nextSong.album,
+            nextSong.length,
+            setSongIsPlaying,
+            shuffleRef,
+            loopRef,
+            queueRef,
+            historyRef,
+            setCurrentSong,
+            playbackRef,
+            displayType,
+            currPlaylistPlayingRef,
+            setCurrPlaylistPlaying
+        );
     }
 
     return (
