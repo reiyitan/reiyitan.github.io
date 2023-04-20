@@ -124,6 +124,7 @@ const App = () => {
         setCurrPlaylistPlaying,
         historyRef,
         queueRef,
+        shuffleRef,
         playbackRef
     };
 

@@ -42,7 +42,7 @@ const BottomBar = ({
         pauseSong,
         shuffleRef
     } = useContext(Context);
-
+    
     /**
      * Sets the pp-button to display the pause icon and plays the chosen .mp3. 
      */
@@ -137,7 +137,7 @@ const BottomBar = ({
     }
 
     useEffect(() => {
-        handleShuffle();
+        if (currPlaylistPlaying) handleShuffle();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [shuffle]);
 
