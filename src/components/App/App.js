@@ -1,7 +1,7 @@
 import React from "react"; 
 import "./style.css"; 
 import { useState, useRef, useEffect, createContext } from "react";
-import { createPlayback, slicePlaylist } from "../functions";
+import { createPlayback, slicePlaylist, songsAreEqual, shuffleArray } from "../functions";
 import Header from "../Header"; 
 import Searchbar from "../Searchbar";
 import Sidebar from "../Sidebar"; 
@@ -20,6 +20,8 @@ const App = () => {
     const [displayType, setDisplayType] = useState("");
     const [displaySongs, setDisplaySongs] = useState([]);
     const [currentSong, setCurrentSong] = useState("");
+    const currentSongRef = useRef(currentSong);
+    useEffect(() => {currentSongRef.current = currentSong;}, [currentSong]);
     const [openID, setOpenID] = useState("");
     const [currPlaylistDisplaying, setCurrPlaylistDisplaying] = useState("");
     const [songIsPlaying, setSongIsPlaying] = useState(false);
@@ -44,11 +46,7 @@ const App = () => {
     const handleDelete = (target) => {
         setDisplaySongs((prevDisplaySongs) => {
             return prevDisplaySongs.filter((song) => {
-                return !(song.title === target.title
-                    && song.artist === target.artist
-                    && song.album === target.album
-                    && song.length === target.length
-                )
+                return !songsAreEqual(song, target)
             });
         });
     }
@@ -73,14 +71,14 @@ const App = () => {
     * @param album - The album of the song to be played.
     * @param length - The length of the song to be played.
     */
-    const playSong = (title, artist, album, length) => {
+    const playSong = (song) => {
+        if (
+            (historyRef.current.length === 0
+            || !songsAreEqual(historyRef.current[historyRef.current.length - 1], song))
+            && currentSong !== ""
+        ) historyRef.current.push(currentSong);
         //the requested song is already playing. 
-        if (playbackRef.current
-            && currentSong.title === title
-            && currentSong.artist === artist
-            && currentSong.album === album 
-            && currentSong.length === length
-        ) {
+        if (playbackRef.current && songsAreEqual(currentSong, song)) {
             setSongIsPlaying(true);
             playbackRef.current.play();
         }
@@ -88,15 +86,13 @@ const App = () => {
         else {
             if (playbackRef.current) playbackRef.current.unload();
             playbackRef.current = createPlayback(
-                title,
-                artist,
-                album,
-                length,
+                song,
                 setSongIsPlaying,
                 shuffleRef,
                 loopRef,
                 queueRef,
                 historyRef,
+                currentSongRef,
                 setCurrentSong,
                 playbackRef,
                 displayType,
@@ -108,11 +104,9 @@ const App = () => {
             queueRef.current = slicePlaylist(
                 "user goes here",
                 currPlaylistDisplaying,
-                title,
-                artist,
-                album,
-                length
+                song
             ).reverse()
+            if (shuffle) shuffleArray(queueRef.current);
         }
     }
 
@@ -128,7 +122,9 @@ const App = () => {
         setCurrPlaylistDisplaying,
         currPlaylistPlaying,
         setCurrPlaylistPlaying,
-        queueRef
+        historyRef,
+        queueRef,
+        playbackRef
     };
 
     return (
@@ -166,6 +162,7 @@ const App = () => {
                 historyRef={historyRef}
                 displayType={displayType}
                 currPlaylistPlayingRef={currPlaylistPlayingRef}
+                currentSongRef={currentSongRef}
             />
         </Context.Provider>
     );

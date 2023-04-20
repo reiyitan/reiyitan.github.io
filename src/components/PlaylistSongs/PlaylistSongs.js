@@ -7,10 +7,7 @@ import "./style.css";
 /**
  * A component for displaying song information in the main panel. 
  * 
- * @param title - The title of the song. 
- * @param artist - The name of the song's artist.
- * @param album - The album the song is from. 
- * @param length - The length of the song.
+ * @param song - An object representing this song.
  * @param currentSong - An object representing the current song that is playing. 
  * @param setCurrentSong - Updates state of currentSong. 
  * @param setCurrPlaylistPlaying - Sets state of currentPlaylistPlaying.
@@ -25,16 +22,11 @@ import "./style.css";
  * @returns A component that represents one row of the playlist displayed on the main panel.
  */
 const PlaylistSong = function({
-    title, 
-    artist, 
-    album, 
-    length, 
+    song,
     currentSong,
     songIsPlaying, 
 }) {
     const {
-        setCurrentSong,
-        setSongIsPlaying,
         handleDelete,
         pauseSong,
         playSong,
@@ -45,14 +37,8 @@ const PlaylistSong = function({
      * Plays the current song. 
      */
     const handlePlay = () => {
-        setCurrentSong({
-            "title": title,
-            "artist": artist,
-            "album": album,
-            "length": length
-        });
+        playSong(song);
         setCurrPlaylistPlaying(currPlaylistDisplaying);
-        playSong(title, artist, album, length);
     }
 
     /**
@@ -60,27 +46,22 @@ const PlaylistSong = function({
      * Calls handleDelete defined in App.js.
      */
     const deleteSong = () => {
-        handleDelete({
-            title: title,
-            artist: artist,
-            album: album,
-            length: length
-        });
+        handleDelete(song);
     }
 
     return (
         <div className="song-row">
-            <button className={(isPlaying(currentSong, title, artist, album, length, songIsPlaying)) 
+            <button className={(isPlaying(currentSong, song, songIsPlaying)) 
                     ? "song-row-playbutton playing" 
                     : "song-row-playbutton notplaying"}
-                onClick={(isPlaying(currentSong, title, artist, album, length, songIsPlaying))
+                onClick={(isPlaying(currentSong, song, songIsPlaying))
                     ? pauseSong
                     : handlePlay
                 }>
-                <span className="song-span-title">{title}</span>
-                <span className="song-span-artist">{artist}</span>
-                <span className="song-span-album">{album}</span>
-                <span className="song-span-length">{length}</span>
+                <span className="song-span-title">{song.title}</span>
+                <span className="song-span-artist">{song.artist}</span>
+                <span className="song-span-album">{song.album}</span>
+                <span className="song-span-length">{song.length}</span>
             </button>
             <button className="song-row-deletebutton" onClick={deleteSong}>-</button>
         </div>
@@ -108,10 +89,7 @@ const PlaylistSongs = ({
         displaySongs.map((song) => (
             <PlaylistSong
                 key={`${song.title}${song.artist}${song.album}${song.length}`}
-                title={song.title}
-                artist={song.artist}
-                album={song.album}
-                length={song.length}
+                song={song}
                 currentSong={currentSong}
                 setCurrentSong={setCurrentSong}
                 songIsPlaying={songIsPlaying}

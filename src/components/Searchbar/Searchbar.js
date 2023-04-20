@@ -22,6 +22,7 @@ const Searchbar = ({
         setDisplaySongs,
         setCurrPlaylistPlaying
     } = useContext(Context);
+    
     const handleSearch = (e) => {
         e.preventDefault();
         setCurrPlaylistPlaying(null);
