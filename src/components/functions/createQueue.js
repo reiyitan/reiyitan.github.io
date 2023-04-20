@@ -10,14 +10,18 @@ export default function createQueue(
     currPlaylistPlaying,
     shuffle,
     queueRef,
-    currentSong
+    currentSong,
+    loopRef
 ) {
     let newQueue = loadPlaylistSongs("user goes here", currPlaylistPlaying);
+    if (songsAreEqual(newQueue[newQueue.length - 1], currentSong) && !loopRef.current) {
+        return [];
+    }
     if (shuffle) {
         shuffleArray(newQueue);
     }
     else {
-        newQueue = slicePlaylist("user goes here", currPlaylistPlaying, currentSong).reverse();
+        newQueue = slicePlaylist("user goes here", currPlaylistPlaying, currentSong, loopRef).reverse();
     }
     newQueue = newQueue.filter((song) => !songsAreEqual(song, currentSong));
     queueRef.current = newQueue;

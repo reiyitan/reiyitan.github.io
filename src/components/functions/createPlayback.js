@@ -79,7 +79,8 @@ export default function createPlayback(
                     currPlaylistPlayingRef.current,
                     shuffleRef.current,
                     queueRef,
-                    currentSongRef.current
+                    currentSongRef.current,
+                    loopRef
                 )
             }
             const nextSong = queueRef.current.pop(); 

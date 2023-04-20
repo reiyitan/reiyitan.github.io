@@ -104,7 +104,8 @@ const App = () => {
             queueRef.current = slicePlaylist(
                 "user goes here",
                 currPlaylistDisplaying,
-                song
+                song,
+                loopRef
             ).reverse()
             if (shuffle) shuffleArray(queueRef.current);
         }

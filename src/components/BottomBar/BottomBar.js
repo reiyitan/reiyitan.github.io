@@ -42,7 +42,7 @@ const BottomBar = ({
         pauseSong,
         shuffleRef
     } = useContext(Context);
-    
+
     /**
      * Sets the pp-button to display the pause icon and plays the chosen .mp3. 
      */
@@ -104,7 +104,13 @@ const BottomBar = ({
             nextSong = queueRef.current.pop();
         }
         else if (loop && currPlaylistPlaying) {
-            createQueue(currPlaylistPlaying, shuffle, queueRef, currentSong);
+            createQueue(currPlaylistPlaying, shuffle, queueRef, currentSong, loopRef);
+            if (queueRef.current.length === 0) {
+                setCurrentSong("");
+                setSongIsPlaying(false);
+                playbackRef.current = null;
+                return;
+            }
             nextSong = queueRef.current.pop();
         }
         else {
@@ -133,7 +139,7 @@ const BottomBar = ({
         if (displayType === "search") {
             return;
         }
-        createQueue(currPlaylistPlaying, shuffle, queueRef, currentSong);
+        createQueue(currPlaylistPlaying, shuffle, queueRef, currentSong, loopRef);
     }
 
     useEffect(() => {
@@ -163,6 +169,14 @@ const BottomBar = ({
                 }
             >
             </button>
+            <input
+                type="range"
+                className="slider seek"
+                name="seek"
+                min="0"
+                max={(playbackRef.current !== null) ? playbackRef.current.duration() : 0}
+            >
+            </input>
             <button 
                 className={"button small ff"}
                 onClick={handleForward}

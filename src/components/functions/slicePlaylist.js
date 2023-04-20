@@ -14,7 +14,8 @@ import { default as songsAreEqual } from "./songsAreEqual";
 export default function slicePlaylist(
     user, 
     playlistName,
-    song
+    song,
+    loopRef
 ) {
     let playlist = loadPlaylistSongs(user, playlistName);
     for (let i = 0; i < playlist.length; i++) {
@@ -23,5 +24,6 @@ export default function slicePlaylist(
             return playlist.slice(i + 1);
         }
     }
-    return playlist;
+    if (!loopRef.current) return [];
+    return playlist.filter((playlistSong) => !songsAreEqual(song, playlistSong));
 }
