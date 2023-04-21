@@ -78,7 +78,6 @@ export default function createPlayback(
                 queueRef.current = createQueue(    
                     currPlaylistPlayingRef.current,
                     shuffleRef.current,
-                    queueRef,
                     currentSongRef.current,
                     loopRef
                 )
