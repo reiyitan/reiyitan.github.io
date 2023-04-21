@@ -9,7 +9,6 @@ import { default as slicePlaylist } from "./slicePlaylist";
 export default function createQueue(
     currPlaylistPlaying,
     shuffle,
-    queueRef,
     currentSong,
     loopRef
 ) {

@@ -140,7 +140,7 @@ const BottomBar = ({
         if (displayType === "search") {
             return;
         }
-        createQueue(currPlaylistPlaying, shuffle, queueRef, currentSong, loopRef);
+        queueRef.current = createQueue(currPlaylistPlaying, shuffle, queueRef, currentSong, loopRef);
     }
 
     useEffect(() => {
