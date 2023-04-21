@@ -1,5 +1,6 @@
 import React from "react";
 import { Context } from "../App/App";
+import Seekbar from "../Seekbar";
 import { useContext, useEffect } from "react";
 import { 
     createPlayback, 
@@ -29,7 +30,6 @@ const BottomBar = ({
     loop,
     setLoop,
     loopRef,
-    queueRef,
     historyRef,
     displayType,
     currPlaylistPlayingRef,
@@ -40,7 +40,8 @@ const BottomBar = ({
         setCurrentSong,
         setSongIsPlaying,
         pauseSong,
-        shuffleRef
+        shuffleRef,
+        queueRef
     } = useContext(Context);
 
     /**
@@ -104,7 +105,7 @@ const BottomBar = ({
             nextSong = queueRef.current.pop();
         }
         else if (loop && currPlaylistPlaying) {
-            createQueue(currPlaylistPlaying, shuffle, queueRef, currentSong, loopRef);
+            queueRef.current = createQueue(currPlaylistPlaying, shuffle, queueRef, currentSong, loopRef);
             if (queueRef.current.length === 0) {
                 setCurrentSong("");
                 setSongIsPlaying(false);
@@ -169,14 +170,6 @@ const BottomBar = ({
                 }
             >
             </button>
-            <input
-                type="range"
-                className="slider seek"
-                name="seek"
-                min="0"
-                max={(playbackRef.current !== null) ? playbackRef.current.duration() : 0}
-            >
-            </input>
             <button 
                 className={"button small ff"}
                 onClick={handleForward}
@@ -187,6 +180,7 @@ const BottomBar = ({
                 onClick={() => setLoop(!loop)}
             >
             </button>
+            <Seekbar />
         </div>
     )
 }

@@ -18,6 +18,11 @@ export default function loadPlaylistSongs(user, playlistName) {
             {"title": "test4", "artist": "Kevin Macleod", "album": "N/A", "length": "length"}
         ]
     }
+    if (playlistName === "b") {
+        return [
+            {"title": "Cipher", "artist": "Kevin Macleod", "album": "test 1 song", "length": "1:23"}
+        ]
+    }
     if (playlistName === "kevin") {
         return [
             {"title": "Cipher", "artist": "Kevin Macleod", "album": "N/A", "length": "length"},

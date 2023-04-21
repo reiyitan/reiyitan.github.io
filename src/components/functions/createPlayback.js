@@ -75,7 +75,7 @@ export default function createPlayback(
                 return;
             }
             else if (queueRef.current.length === 0) {
-                createQueue(    
+                queueRef.current = createQueue(    
                     currPlaylistPlayingRef.current,
                     shuffleRef.current,
                     queueRef,

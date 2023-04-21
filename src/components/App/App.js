@@ -160,7 +160,6 @@ const App = () => {
                 loop={loop}
                 setLoop={setLoop}
                 loopRef={loopRef}
-                queueRef={queueRef}
                 historyRef={historyRef}
                 displayType={displayType}
                 currPlaylistPlayingRef={currPlaylistPlayingRef}

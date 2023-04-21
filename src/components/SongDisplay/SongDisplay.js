@@ -1,6 +1,6 @@
 import React from "react";
 import { Context } from "../App/App";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import PlaylistSongs from "../PlaylistSongs";
 import SearchbarSongs from "../SearchbarSongs";
 import "./style.css";

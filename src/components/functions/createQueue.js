@@ -14,6 +14,7 @@ export default function createQueue(
     loopRef
 ) {
     let newQueue = loadPlaylistSongs("user goes here", currPlaylistPlaying);
+    if (newQueue.length === 1) return newQueue;
     if (songsAreEqual(newQueue[newQueue.length - 1], currentSong) && !loopRef.current) {
         return [];
     }
@@ -24,5 +25,5 @@ export default function createQueue(
         newQueue = slicePlaylist("user goes here", currPlaylistPlaying, currentSong, loopRef).reverse();
     }
     newQueue = newQueue.filter((song) => !songsAreEqual(song, currentSong));
-    queueRef.current = newQueue;
+    return newQueue;
 }

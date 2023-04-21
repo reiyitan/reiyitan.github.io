@@ -25,5 +25,6 @@ export default function slicePlaylist(
         }
     }
     if (!loopRef.current) return [];
+    if (playlist.length === 1) return playlist;
     return playlist.filter((playlistSong) => !songsAreEqual(song, playlistSong));
 }
