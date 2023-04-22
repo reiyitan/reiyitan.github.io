@@ -13,3 +13,21 @@
     border-radius: 50%;
     background-color: #ECEFF4;
 }
+
+#timestamp {
+    position: absolute;
+    font-size: 12px;
+    background-color: #5E81AC;
+    bottom: calc(20% - 2px);
+    left: calc(50% - calc(45%) / 2 - 27.5px);
+    transform: translate(-50%);
+}
+
+#remaining {
+    position: absolute;
+    font-size: 12px;
+    background-color: #5E81AC;
+    bottom: calc(20% - 2px);
+    left: calc(50% + calc(45%) / 2 + 27.5px);
+    transform: translate(-50%);
+}

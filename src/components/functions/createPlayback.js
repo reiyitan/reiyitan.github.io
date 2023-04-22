@@ -29,7 +29,8 @@ export default function createPlayback(
     displayType,
     currPlaylistPlayingRef,
     setCurrPlaylistPlaying,
-    songShouldLoad
+    songShouldLoad,
+    volumeRef
 ) {
     let path;
     if (song.title === "matthew") {
@@ -61,7 +62,7 @@ export default function createPlayback(
     setCurrentSong(song);
     const playback = new Howl({
         src: [path],
-        volume: 0.2,
+        volume: volumeRef.current,
         onload: () => {
             if (!songsAreEqual(song, currentSongRef.current)) return;
             if (!songShouldLoad.current) return;
@@ -108,7 +109,8 @@ export default function createPlayback(
                 displayType,
                 currPlaylistPlayingRef,
                 setCurrPlaylistPlaying,
-                songShouldLoad
+                songShouldLoad,
+                volumeRef
             );
         }
     });

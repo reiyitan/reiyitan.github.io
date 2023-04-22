@@ -12,21 +12,21 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     background-color: #5E81AC;
-    width: 300px;
-    max-width: 300px;
+    width: 20%;
+    max-width: 20%;
 }
 
 .bottom-bar-title {
     position: absolute;
     left: 5px;
-    top: 10px;
+    top: 25%;
 }
 
 .bottom-bar-artist {
     position: absolute;
     left: 5px;
-    bottom: 10px;
-    font-size: 14px;
+    bottom: 25%;
+    font-size: 11px;
 }
 
 .button {
