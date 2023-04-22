@@ -31,7 +31,7 @@ const PlaylistSong = function({
         pauseSong,
         playSong,
         setCurrPlaylistPlaying,
-        currPlaylistDisplaying
+        currPlaylistDisplaying,
     } = useContext(Context);
     /**
      * Plays the current song. 

@@ -7,10 +7,12 @@ function stopPlayback(
     setCurrPlaylistPlaying, 
     setCurrentSong, 
     playbackRef,
+    songShouldLoad
 ) {
     setSongIsPlaying(false);
     setCurrPlaylistPlaying("");
     setCurrentSong("");
+    songShouldLoad.current = true;
     playbackRef.current = null;
 }
 
@@ -26,7 +28,8 @@ export default function createPlayback(
     playbackRef,
     displayType,
     currPlaylistPlayingRef,
-    setCurrPlaylistPlaying
+    setCurrPlaylistPlaying,
+    songShouldLoad
 ) {
     let path;
     if (song.title === "matthew") {
@@ -54,24 +57,30 @@ export default function createPlayback(
         path = `../../songs/${song.title}.mp3`;
     }
     if (playbackRef.current) playbackRef.current.unload();
+    songShouldLoad.current = true;
     setCurrentSong(song);
     const playback = new Howl({
         src: [path],
         volume: 0.2,
         onload: () => {
             if (!songsAreEqual(song, currentSongRef.current)) return;
+            if (!songShouldLoad.current) return;
+            songShouldLoad.current = false;
             playback.play();
+            setCurrentSong(song);
             setSongIsPlaying(true);
             playbackRef.current = playback;
         },
         onend: () => {
             playback.unload();
+            songShouldLoad.current = true;
+            setSongIsPlaying(false);
             if (
                 historyRef.current.length === 0
                 || !songsAreEqual(historyRef.current[historyRef.current.length - 1], song)
             ) historyRef.current.push(song);
             if ((queueRef.current.length === 0 && !loopRef.current) || displayType === "search") {
-                stopPlayback(setSongIsPlaying, setCurrPlaylistPlaying, setCurrentSong, playbackRef);
+                stopPlayback(setSongIsPlaying, setCurrPlaylistPlaying, setCurrentSong, playbackRef, songShouldLoad);
                 return;
             }
             else if (queueRef.current.length === 0) {
@@ -96,7 +105,8 @@ export default function createPlayback(
                 playbackRef,
                 displayType,
                 currPlaylistPlayingRef,
-                setCurrPlaylistPlaying
+                setCurrPlaylistPlaying,
+                songShouldLoad
             );
         }
     });

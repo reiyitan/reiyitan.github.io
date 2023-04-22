@@ -37,6 +37,7 @@ const App = () => {
     const [loop, setLoop] = useState(false);
     const loopRef = useRef(loop);
     useEffect(() => {loopRef.current = loop;}, [loop]);
+    const songShouldLoad = useRef(true);
 
     /**
      * Deletes a song from a playlist.
@@ -97,7 +98,8 @@ const App = () => {
                 playbackRef,
                 displayType,
                 currPlaylistPlayingRef,
-                setCurrPlaylistPlaying
+                setCurrPlaylistPlaying,
+                songShouldLoad
             );
         }
         if (displayType === "playlist") {
@@ -126,7 +128,8 @@ const App = () => {
         historyRef,
         queueRef,
         shuffleRef,
-        playbackRef
+        playbackRef,
+        songShouldLoad
     };
 
     return (

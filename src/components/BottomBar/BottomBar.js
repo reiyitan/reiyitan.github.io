@@ -41,7 +41,8 @@ const BottomBar = ({
         setSongIsPlaying,
         pauseSong,
         shuffleRef,
-        queueRef
+        queueRef,
+        songShouldLoad
     } = useContext(Context);
 
     /**
@@ -87,7 +88,8 @@ const BottomBar = ({
                 playbackRef,
                 displayType,
                 currPlaylistPlayingRef,
-                setCurrPlaylistPlaying
+                setCurrPlaylistPlaying,
+                songShouldLoad
             );
         }
     }
@@ -104,6 +106,7 @@ const BottomBar = ({
         if (queueRef.current.length > 0) {
             nextSong = queueRef.current.pop();
         }
+        //loop is on and able to load songs from a playlist
         else if (loop && currPlaylistPlaying) {
             queueRef.current = createQueue(currPlaylistPlaying, shuffle, currentSong, loopRef);
             if (queueRef.current.length === 0) {
@@ -114,6 +117,7 @@ const BottomBar = ({
             }
             nextSong = queueRef.current.pop();
         }
+        //stop playback
         else {
             setCurrentSong("");
             setSongIsPlaying(false);
@@ -132,14 +136,13 @@ const BottomBar = ({
             playbackRef,
             displayType,
             currPlaylistPlayingRef,
-            setCurrPlaylistPlaying
+            setCurrPlaylistPlaying,
+            songShouldLoad
         );
     }
 
     const handleShuffle = () => {
-        if (displayType === "search") {
-            return;
-        }
+        if (displayType === "search") return;
         queueRef.current = createQueue(currPlaylistPlaying, shuffle, currentSong, loopRef);
     }
 
