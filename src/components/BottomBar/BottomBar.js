@@ -74,7 +74,7 @@ const BottomBar = ({
             || historyRef.current.length === 0)
         ) playbackRef.current.seek(0);
         else {
-            queueRef.current.push(currentSong); 
+            if (currentSong) queueRef.current.push(currentSong); 
             const previousSong = historyRef.current.pop(); 
             createPlayback(
                 previousSong,
@@ -106,7 +106,7 @@ const BottomBar = ({
         if (queueRef.current.length > 0) {
             nextSong = queueRef.current.pop();
         }
-        //loop is on and able to load songs from a playlist
+        //loop is on and able to load songs from the current playlist
         else if (loop && currPlaylistPlaying) {
             queueRef.current = createQueue(currPlaylistPlaying, shuffle, currentSong, loopRef);
             if (queueRef.current.length === 0) {
@@ -141,20 +141,20 @@ const BottomBar = ({
         );
     }
 
-    const handleShuffle = () => {
+    const setQueue = () => {
         if (displayType === "search") return;
-        queueRef.current = createQueue(currPlaylistPlaying, shuffle, currentSong, loopRef);
+        queueRef.current = createQueue(currPlaylistPlaying, shuffle, currentSong, loop);
     }
 
     useEffect(() => {
-        if (currPlaylistPlaying) handleShuffle();
+        if (currPlaylistPlaying) setQueue();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [shuffle]);
+    }, [shuffle, loop]);
 
     return (
         <div id="bottom-bar">
-            <span className="bottom-bar-title">{currentSong.title}</span>
-            <span className="bottom-bar-artist">{currentSong.artist}</span>
+            <span className="bottom-bar-title">{(currentSong) ? currentSong.title : ""}</span>
+            <span className="bottom-bar-artist">{(currentSong) ? currentSong.artist : ""}</span>
             <button 
                 className={(shuffle) ? "button small shuffle shuffle-on" : "button small shuffle shuffle-off"}
                 onClick={() => setShuffle(!shuffle)}

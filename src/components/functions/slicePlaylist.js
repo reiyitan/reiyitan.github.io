@@ -15,7 +15,7 @@ export default function slicePlaylist(
     user, 
     playlistName,
     song,
-    loopRef
+    loop
 ) {
     let playlist = loadPlaylistSongs(user, playlistName);
     for (let i = 0; i < playlist.length; i++) {
@@ -24,7 +24,7 @@ export default function slicePlaylist(
             return playlist.slice(i + 1);
         }
     }
-    if (!loopRef.current) return [];
+    if (!loop) return [];
     if (playlist.length === 1) return playlist;
     return playlist.filter((playlistSong) => !songsAreEqual(song, playlistSong));
 }

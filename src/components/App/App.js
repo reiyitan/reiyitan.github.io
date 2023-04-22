@@ -17,15 +17,14 @@ const Context = createContext();
  */
 const App = () => {
     const [header, setHeader] = useState("work in progress");
+    const [openID, setOpenID] = useState("");
     const [displayType, setDisplayType] = useState("");
     const [displaySongs, setDisplaySongs] = useState([]);
-    const [currentSong, setCurrentSong] = useState("");
+    const [currentSong, setCurrentSong] = useState(null);
     const currentSongRef = useRef(currentSong);
     useEffect(() => {currentSongRef.current = currentSong;}, [currentSong]);
-    const [openID, setOpenID] = useState("");
     const [currPlaylistDisplaying, setCurrPlaylistDisplaying] = useState("");
     const [songIsPlaying, setSongIsPlaying] = useState(false);
-    const playbackRef = useRef(null);
     const [currPlaylistPlaying, setCurrPlaylistPlaying] = useState(null);
     const currPlaylistPlayingRef = useRef(currPlaylistPlaying);
     useEffect(() => {currPlaylistPlayingRef.current = currPlaylistPlaying;}, [currPlaylistPlaying]);
@@ -38,6 +37,7 @@ const App = () => {
     const loopRef = useRef(loop);
     useEffect(() => {loopRef.current = loop;}, [loop]);
     const songShouldLoad = useRef(true);
+    const playbackRef = useRef(null);
 
     /**
      * Deletes a song from a playlist.
@@ -76,9 +76,9 @@ const App = () => {
         if (
             (historyRef.current.length === 0
             || !songsAreEqual(historyRef.current[historyRef.current.length - 1], song))
-            && currentSong !== ""
+            && currentSong
         ) historyRef.current.push(currentSong);
-        //the requested song is already playing. 
+        //the requested song is already playing. unpause it.
         if (playbackRef.current && songsAreEqual(currentSong, song)) {
             setSongIsPlaying(true);
             playbackRef.current.play();
@@ -107,7 +107,7 @@ const App = () => {
                 "user goes here",
                 currPlaylistDisplaying,
                 song,
-                loopRef
+                loop
             ).reverse()
             if (shuffle) shuffleArray(queueRef.current);
         }

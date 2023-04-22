@@ -8,7 +8,9 @@
  */
 export default function songsAreEqual(song1, song2) {
     return (
-        song1.title === song2.title
+        song1
+        && song2
+        && song1.title === song2.title
         && song1.artist === song2.artist
         && song1.album === song2.album
         && song1.length === song2.length

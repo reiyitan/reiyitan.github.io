@@ -10,8 +10,8 @@ function stopPlayback(
     songShouldLoad
 ) {
     setSongIsPlaying(false);
-    setCurrPlaylistPlaying("");
-    setCurrentSong("");
+    setCurrPlaylistPlaying(null);
+    setCurrentSong(null);
     songShouldLoad.current = true;
     playbackRef.current = null;
 }
@@ -74,12 +74,14 @@ export default function createPlayback(
         onend: () => {
             playback.unload();
             songShouldLoad.current = true;
-            setSongIsPlaying(false);
             if (
                 historyRef.current.length === 0
                 || !songsAreEqual(historyRef.current[historyRef.current.length - 1], song)
             ) historyRef.current.push(song);
-            if ((queueRef.current.length === 0 && !loopRef.current) || displayType === "search") {
+            if ((queueRef.current.length === 0 && !loopRef.current) 
+                || displayType === "search"
+                || !currPlaylistPlayingRef.current
+            ) {
                 stopPlayback(setSongIsPlaying, setCurrPlaylistPlaying, setCurrentSong, playbackRef, songShouldLoad);
                 return;
             }
@@ -88,10 +90,10 @@ export default function createPlayback(
                     currPlaylistPlayingRef.current,
                     shuffleRef.current,
                     currentSongRef.current,
-                    loopRef
+                    loopRef.current
                 )
             }
-            const nextSong = queueRef.current.pop(); 
+            const nextSong = queueRef.current.pop();
             setCurrentSong(nextSong);
             createPlayback(
                 nextSong,

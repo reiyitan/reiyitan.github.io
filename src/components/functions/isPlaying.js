@@ -11,7 +11,8 @@ import { default as songsAreEqual } from "./songsAreEqual";
 */
 export default function isPlaying(currentSong, song, songIsPlaying) {
     return (
-        songsAreEqual(currentSong, song)
+        song
+        && songsAreEqual(currentSong, song)
         && songIsPlaying
     );
 }
