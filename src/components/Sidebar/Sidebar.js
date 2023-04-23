@@ -1,7 +1,7 @@
 import React from "react"; 
 import { useState } from "react"; 
 import SidebarPlaylist from "../SidebarPlaylist"; 
-import PlaylistNameForm from "../PlaylistNameForm";
+import Form from "../Form";
 import { loadPlaylists } from "../functions";
 import "./style.css";
 
@@ -21,13 +21,7 @@ const Sidebar = ({
     displayType, 
     setDisplayType,
 }) => {
-    const [playlists, setPlaylists] = useState(loadPlaylists("user goes here")); 
-    const [addPlaylistButtonStyle, setAddPlaylistButtonStyle] = useState("add-playlist-button");
-    const [playlistNameInputStyle, setPlaylistNameInputStyle] = useState("hidden");
-    const showNameForm = () => {
-        setAddPlaylistButtonStyle("hidden");
-        setPlaylistNameInputStyle("playlist-name-input");
-    }
+    const [playlists, setPlaylists] = useState(loadPlaylists("user goes here"));
 
     /**
      * Adds a new empty playlist to this component's list of playlists. 
@@ -35,7 +29,8 @@ const Sidebar = ({
      * 
      * @param playlistName - The name of the new playlist.
      */
-    const handleSubmit = (playlistName) => {
+    const createPlaylist = (e) => {
+        const playlistName = e.target.query.value;
         if (playlistName === "") {
             console.log("no empty playlist name allowed");
         }
@@ -47,17 +42,21 @@ const Sidebar = ({
             //TODO add this playlist to the backend as an empty playlist
             setPlaylists([...playlists, playlistName]);
         }
-        setAddPlaylistButtonStyle("add-playlist-button");
-        setPlaylistNameInputStyle("hidden");
     }
 
     return (
         <div id="sidebar">
-            <PlaylistNameForm 
-                playlistNameInputStyle={playlistNameInputStyle} 
-                onFormSubmit={handleSubmit}
+            <Form 
+                title="Add a playlist"
+                placeholder="Enter playlist title:"
+                handleSubmit={createPlaylist}
+                position = {{
+                    left: "0px",
+                    top: "0px"
+                }}
+                image="/icons/add/add.png"
+                imageHover="/icons/add/add-hover.png"
             />
-            <button onClick={showNameForm} className={addPlaylistButtonStyle}>+ Add a playlist</button>
             <div id="sidebar-playlists">
                 {playlists.slice().reverse().map((playlistName) => (
                     <SidebarPlaylist 

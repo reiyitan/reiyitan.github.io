@@ -20,6 +20,7 @@ const SeekBar = () => {
     //set thumb position to 0 if there is no song playing
     useEffect(() => {
         if (!playbackRef.current) setValues([0]);
+        // eslint-disable-next-line
     }, [playbackRef.current]);
 
     //update the position of the thumb every 60th of a second

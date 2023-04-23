@@ -48,19 +48,19 @@
 }
 
 .play {
-    background-image: url("../../icons/play/play.png");
+    background-image: url("/public/icons/play/play.png");
 }
 
 .play:hover {
-    background-image: url("../../icons/play/play-hover.png");
+    background-image: url("/public/icons/play/play-hover.png");
 }
 
 .pause {
-    background-image: url("../../icons/pause/pause.png");
+    background-image: url("/public/icons/pause/pause.png");
 }
 
 .pause:hover {
-    background-image: url("../../icons/pause/pause-hover.png");
+    background-image: url("/public/icons/pause/pause-hover.png");
 }
 
 .small {
@@ -75,39 +75,39 @@
 }
 
 .shuffle-on {
-    background-image: url("../../icons/shuffle/shuffle-on.png");
+    background-image: url("/public/icons/shuffle/shuffle-on.png");
 }
 
 .shuffle-on:hover {
-    background-image: url("../../icons/shuffle/shuffle-on-hover.png");
+    background-image: url("/public/icons/shuffle/shuffle-on-hover.png");
 }
 
 .shuffle-off {
-    background-image: url("../../icons/shuffle/shuffle-off.png");
+    background-image: url("/public/icons/shuffle/shuffle-off.png");
 }
 
 .shuffle-off:hover {
-    background-image: url("../../icons/shuffle/shuffle-off-hover.png");
+    background-image: url("/public/icons/shuffle/shuffle-off-hover.png");
 }
 
 .rw {
     left: 50%;
     transform: translateX(calc(-50% - 50px));
-    background-image: url("../../icons/rw/rw.png");
+    background-image: url("/public/icons/rw/rw.png");
 }
 
 .rw:hover {
-    background-image: url("../../icons/rw/rw-hover.png");
+    background-image: url("/public/icons/rw/rw-hover.png");
 }
 
 .ff {
     left: 50%;
     transform: translateX(calc(-50% + 50px));
-    background-image: url("../../icons/ff/ff.png");
+    background-image: url("/public/icons/ff/ff.png");
 }   
 
 .ff:hover {
-    background-image: url("../../icons/ff/ff-hover.png");
+    background-image: url("/public/icons/ff/ff-hover.png");
 }
 
 .loop {
@@ -116,17 +116,17 @@
 }
 
 .loop-on {
-    background-image: url("../../icons/loop/loop-on.png");
+    background-image: url("/public/icons/loop/loop-on.png");
 }
 
 .loop-on:hover {
-    background-image: url("../../icons/loop/loop-on-hover.png");
+    background-image: url("/public/icons/loop/loop-on-hover.png");
 }
 
 .loop-off {
-    background-image: url("../../icons/loop/loop-off.png");
+    background-image: url("/public/icons/loop/loop-off.png");
 }
 
 .loop-off:hover {
-    background-image: url("../../icons/loop/loop-off-hover.png");
+    background-image: url("/public/icons/loop/loop-off-hover.png");
 }

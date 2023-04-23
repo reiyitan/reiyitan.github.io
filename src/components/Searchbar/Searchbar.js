@@ -1,8 +1,8 @@
 import React from "react";
 import { Context } from "../App/App";
+import Form from "../Form";
 import { useContext } from "react"
 import { loadAllSongs } from "../functions";
-import "./style.css";
 
 /**
  * Component for the search bar. 
@@ -43,16 +43,17 @@ const Searchbar = ({
         setDisplaySongs(result);
     }
     return (
-        <div id="searchbar-div">
-            <form onSubmit={handleSearch}>
-                <input 
-                    id="searchbar-input" 
-                    type="text" 
-                    placeholder="Find something to listen to"
-                    name="query"
-                 />
-            </form>
-        </div>
+        <Form
+            title="Search"
+            placeholder="Find something to listen to"
+            handleSubmit={handleSearch}
+            position = {{
+                left: "0px",
+                top: "0px"
+            }}
+            image="/icons/search/search.png"
+            imageHover="/icons/search/search-hover.png"
+        />
     );
 }
 
