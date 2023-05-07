@@ -10,8 +10,8 @@
  */
 export default function loadPlaylists(user) {
     return (
-        ["askmdkasmd", "kkmhmrkhmt", "akmsdalksmd", "thrkth", "fjmnbndf", "erihtuer", "sdjfsdjkfjsdklfjsdf",
-            "njrnhrjkthn", "kaslndnkandjk", "eigjnrtgin", "ajibnertbugib", "c", "b", "a", "kevin", "test"]
+        ["test", "kevin", "a", "b", "c", "askmdkasmd", "kkmhmrkhmt", "akmsdalksmd", "thrkth", "fjmnbndf", "erihtuer", "sdjfsdjkfjsdklfjsdf",
+            "njrnhrjkthn", "kaslndnkandjk", "eigjnrtgin", "ajibnertbugib"]
     )
 }
 

@@ -1,6 +1,7 @@
 import React from "react"; 
 import { useState, useEffect, useRef } from "react"; 
 import "./style.css"; 
+import { MagnifyingGlassIcon, PlusIcon } from "@heroicons/react/24/solid";
 
 /**
  * A component that renders a button and a form that displays
@@ -13,21 +14,18 @@ import "./style.css";
  * @param placeholder - The default text to display within the input field. 
  * @param handleSubmit - Callback function to be executed on form submission.
  * @param position - CSS for positioning the component.
- * @param image - The URL to the image to be displayed on the button. 
- * @param imageHover - The URL to the image to be displayed when the button is hovered.
+ * @param icon - The icon to be displayed on the button. 
  */
 const Form = ({
     title,
     placeholder,
     handleSubmit,
     position,
-    image,
-    imageHover
+    icon
 }) => {
     const [showForm, setShowForm] = useState(false); 
     const inputRef = useRef(null);
     const [value, setValue] = useState("");
-    const [isHovering, setIsHovering] = useState(false);
     const style = {
         left: position.left,
         top: position.top
@@ -66,13 +64,13 @@ const Form = ({
                 id={(showForm) ? "hidden" : "form-button"}
                 onClick={() => setShowForm(!showForm)}
                 style={style}
-                onMouseEnter={() => setIsHovering(true)}
-                onMouseLeave={() =>setIsHovering(false)}
             >
-                <img 
-                    src={(isHovering) ? imageHover : image}
-                    alt="">
-                </img>
+                <div id="icon-div">
+                    {icon === "search"
+                        ? <MagnifyingGlassIcon className="icon" />
+                        : <PlusIcon className="icon" />
+                    }
+                </div>
                 <span id="title-span">{title}</span>
             </button>
             <div 

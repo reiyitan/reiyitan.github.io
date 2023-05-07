@@ -7,13 +7,14 @@ import "./style.css";
  * Creates a component that changes volume based on position of 
  * a slider. 
  * 
- * @param volumeRef - A reference to the volume of the entire app. 
+ * @param volume - The current volume. 
+ * @param setVolume - Sets the state of volume. 
  * @param playbackRef - A reference to the current Howl.
  */
-const VolumeBar = ({volumeRef, playbackRef}) => {
-    const [values, setValues] = useState([volumeRef.current]);
+const VolumeBar = ({volume, setVolume, playbackRef}) => {
+    const [values, setValues] = useState([volume]);
     const changeVolume = (volume) => {
-        volumeRef.current = volume;
+        setVolume(volume);
         setValues([volume]);
         if (playbackRef.current) playbackRef.current.volume(volume);
     }

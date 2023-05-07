@@ -3,6 +3,7 @@ import { Context } from "../App/App";
 import { useContext } from "react";
 import { isPlaying } from "../functions";
 import "./style.css";
+import { MinusIcon } from "@heroicons/react/24/solid";
 
 /**
  * A component for displaying song information in the main panel. 
@@ -21,11 +22,11 @@ import "./style.css";
  * 
  * @returns A component that represents one row of the playlist displayed on the main panel.
  */
-const PlaylistSong = function({
+const PlaylistSong = ({
     song,
     currentSong,
     songIsPlaying, 
-}) {
+}) => {
     const {
         handleDelete,
         pauseSong,
@@ -50,10 +51,10 @@ const PlaylistSong = function({
     }
 
     return (
-        <div className="song-row">
+        <div className="playlist-song-row">
             <button className={(isPlaying(currentSong, song, songIsPlaying)) 
-                    ? "song-row-playbutton playing" 
-                    : "song-row-playbutton notplaying"}
+                    ? "playlist-song-row-playbutton playing" 
+                    : "playlist-song-row-playbutton notplaying"}
                 onClick={(isPlaying(currentSong, song, songIsPlaying))
                     ? pauseSong
                     : handlePlay
@@ -63,7 +64,9 @@ const PlaylistSong = function({
                 <span className="song-span-album">{song.album}</span>
                 <span className="song-span-length">{song.length}</span>
             </button>
-            <button className="song-row-deletebutton" onClick={deleteSong}>-</button>
+            <button className="playlist-song-row-deletebutton" onClick={deleteSong}>
+                <MinusIcon className="delete-song-icon" />
+            </button>
         </div>
     );
 }

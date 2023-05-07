@@ -3,6 +3,7 @@ import { Context } from "../App/App";
 import { useState, useContext } from "react";
 import { loadPlaylists, isPlaying } from "../functions";
 import "./style.css";
+import { PlusIcon } from "@heroicons/react/24/solid";
 
 /**
  * A component that appears when the + is clicked next to a SearchbarSong. 
@@ -81,10 +82,10 @@ const SearchbarSong = ({
 
     return (
         <>
-            <div className="song-row">
+            <div className="search-song-row">
                 <button className={(isPlaying(currentSong, song, songIsPlaying)) 
-                        ? "song-row-playbutton playing"
-                        : "song-row-playbutton notplaying"}
+                        ? "search-song-row-playbutton playing"
+                        : "search-song-row-playbutton notplaying"}
                     onClick={(isPlaying(currentSong, song, songIsPlaying))
                         ? pauseSong
                         : handlePlay
@@ -96,9 +97,11 @@ const SearchbarSong = ({
                 </button>
                 <button 
                     className={(popupShowing) 
-                        ? "add-button adding" 
-                        : "add-button notadding"} 
-                    onClick={addSong}>+</button>
+                        ? "search-add-button adding" 
+                        : "search-add-button notadding"} 
+                    onClick={addSong}>
+                        <PlusIcon className="add-song-icon" />
+                </button>
             </div>
             <div className={(popupShowing) ? "playlist-list-wrapper" : "hidden"}>
                 <div className="playlist-list-header">Choose a playlist to add to:</div>

@@ -1,10 +1,13 @@
+.sidebar-playlist {
+    width: 190px;
+    height: 40px;
+}
+
 .playlist-button {
-    top: 0px;
+    position: absolute;
     border: none;
-    width: 75%;
-    max-width: 75%;
+    width: calc(100% - 40px);
     left: 0px;
-    right: 0px;
     height: 40px;
     text-align: left;
     overflow: hidden;
@@ -29,16 +32,30 @@
 }
 
 .delete-button {
-    top: 0px;
+    position: absolute;
+    right: 0px;
     background: #3B4252;
     border: none;
-    width: 25%;
-    max-width: 25%;
-    left: 0px;
-    right: 0px;
+    width: 40px;
     height: 40px;
 }
 
 .delete-button:hover {
     background: #BF616A;
+}
+
+#delete-icon-div {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    background: transparent;
+}
+
+.delete-icon {
+    background: transparent;
+    width: 10px;
+    height: 10px;
 }

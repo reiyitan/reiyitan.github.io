@@ -51,8 +51,7 @@ const Searchbar = ({
                 left: "0px",
                 top: "0px"
             }}
-            image="/icons/search/search.png"
-            imageHover="/icons/search/search-hover.png"
+            icon="search"
         />
     );
 }

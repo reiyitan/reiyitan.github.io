@@ -36,7 +36,7 @@ const App = () => {
     useEffect(() => {loopRef.current = loop;}, [loop]);
     const songShouldLoad = useRef(true);
     const playbackRef = useRef(null);
-    const volumeRef = useRef(0.2);
+    const [volume, setVolume] = useState(0.2);
 
     /**
      * Deletes a song from a playlist.
@@ -99,7 +99,7 @@ const App = () => {
                 currPlaylistPlayingRef,
                 setCurrPlaylistPlaying,
                 songShouldLoad,
-                volumeRef
+                volume
             );
         }
         if (displayType === "playlist") {
@@ -167,7 +167,8 @@ const App = () => {
                 displayType={displayType}
                 currPlaylistPlayingRef={currPlaylistPlayingRef}
                 currentSongRef={currentSongRef}
-                volumeRef={volumeRef}
+                volume={volume}
+                setVolume={setVolume}
             />
         </Context.Provider>
     );

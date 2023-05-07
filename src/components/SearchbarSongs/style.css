@@ -1,13 +1,12 @@
 /* These elements do not change when a song is playing */
-.song-row {
+.search-song-row {
+    width: 100%;
     display: flex;
     flex-direction: row;
 }
 
-.add-button {
-    width: 5%;
-    max-width: 5%;
-    min-width: 5%;
+.search-add-button {
+    width: 40px;
     border: none;
 }
 
@@ -31,18 +30,15 @@
     display: none;
 }
 
-.song-row-playbutton {
+.search-song-row-playbutton {
     display: flex;
     align-items: center;
-    width: 95%;
-    max-width: 95%;
-    min-height: 40px;
+    width: calc(100% - 40px);
     height: 40px;
-    max-height: 40px;
     border: none;
 }
 
-.song-row-playbutton span {
+.search-song-row-playbutton span {
     display: inline-block;
     overflow: hidden;
     white-space: nowrap;
@@ -111,17 +107,19 @@
 /* CSS for the list of playlists that display when a user clicks the add song button */
 .playlist-list-wrapper {
     position: absolute;
-    right: 0px;
-    width: 200px;
-    max-width: 200px;
+    right: 40px;
+    transform: translateY(-40px);
+    width: 400px;
+    height: 200px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.5);
 }
 
 .playlist-list-header {
     position: absolute;
     top: 0px;
-    height: 20px;
+    height: 10%;
     width: 100%;
-    max-width: 100%;
     font-size: 12px;
     border-style: solid;
     border-bottom: none;
@@ -130,26 +128,29 @@
     background: #3B4252;
     display: flex;
     align-items: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .playlist-list {
     position: absolute;
     top: 20px;
     line-height: 1px;
-    max-height: 120px;
+    height: 90%;
     width: 100%;
-    max-width: 100%;
     right: 0px;
     border-style: solid;
     border-color: #434C5E;
     border-width: 2px;
     overflow-y: scroll;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .playlist-select-button {
     background: #3B4252;
-    width: 186px;
-    max-width: 186px;
+    width: 100%;
+    max-width: 100%;
     border: none;
     padding: 0px;
     margin: 0px;
@@ -162,4 +163,10 @@
 
 .playlist-select-button:hover {
     background: #333947;
+}
+
+.add-song-icon {
+    background: transparent;
+    width: 10px;
+    height: 10px;
 }

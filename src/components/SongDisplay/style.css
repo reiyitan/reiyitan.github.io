@@ -4,17 +4,14 @@
     top: 40px;
     right: 0px;
     bottom: 0px;
-    height: calc(100% - 40px);
-    max-height: calc(100% - 40px);
+    max-height: calc(100% - 120px);
 }
 
 #song-display-header {
     display: flex;
     align-items: center;
-    width: calc(0.95 * (100% - 10px));
-    max-width: calc(0.95 * (100% - 10px));
+    width: calc(100% - 50px);
     height: 20px;
-    max-height: 20px;
     background-color: #434C5E;
     border: none;
 }
@@ -26,7 +23,6 @@
 .header-span-title {
     padding-left: 5px;
     width: 35%;
-    max-width: 35%;
     text-align: left;
 }
 
@@ -50,9 +46,9 @@
 #filler {
     position: absolute;
     background-color: #434C5E;
-    left: calc(0.95 * (100% - 10.2px));
+    right: 0px;
     top: 0px;
-    width: calc(5% + 10px);
+    width: 50px;
     height: 20px;
 }
 
@@ -61,5 +57,6 @@
     width: 100%;
     top: 20px;
     bottom: 80px;
+    height: calc(100% - 20px);
     overflow-y: scroll;
 }

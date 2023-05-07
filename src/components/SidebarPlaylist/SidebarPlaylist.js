@@ -3,6 +3,7 @@ import { Context } from "../App/App";
 import { loadPlaylistSongs } from "../functions";
 import { useContext } from "react";
 import "./style.css";
+import { MinusIcon } from "@heroicons/react/24/solid";
 
 /**
  * Component for creating a playlist in the Sidebar. 
@@ -48,13 +49,17 @@ const SidebarPlaylist = ({
         setDisplaySongs(loadPlaylistSongs("user", playlistName));
     }   
     return (
-        <>
+        <div className="sidebar-playlist">
             <button 
                 className={(playlistName===currPlaylistDisplaying) ? "playlist-button showing" : "playlist-button notshowing"}
                 onClick={displayPlaylist}
             >{playlistName}</button>
-            <button className="delete-button" onClick={handleDelete}>-</button>
-        </>
+            <button className="delete-button" onClick={handleDelete}>
+                <div id="delete-icon-div">
+                    <MinusIcon className="delete-icon" />
+                </div>
+            </button>
+        </div>
     );
 }
 
