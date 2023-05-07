@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7865d902.css",
+    "main.js": "/static/js/main.4da265f9.js",
+    "static/media/shuffle-off-hover.png": "/static/media/shuffle-off-hover.f4546e9cf42f7d2c62e5.png",
+    "static/media/shuffle-off.png": "/static/media/shuffle-off.097b9cd2a61efa64785d.png",
+    "static/media/shuffle-on.png": "/static/media/shuffle-on.68426f336c02b50ec6e5.png",
+    "static/media/shuffle-on-hover.png": "/static/media/shuffle-on-hover.47fc0d4a5674e1e41325.png",
+    "index.html": "/index.html",
+    "main.7865d902.css.map": "/static/css/main.7865d902.css.map",
+    "main.4da265f9.js.map": "/static/js/main.4da265f9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7865d902.css",
+    "static/js/main.4da265f9.js"
+  ]
+}
